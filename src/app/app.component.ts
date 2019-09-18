@@ -6,5 +6,41 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'ng8481';
+
+  listaEmails = [];
+
+  email = {
+    destinatario: '',
+    assunto: '',
+    conteudo: ''
+  }
+
+  private _isNewEmailOpen = false;
+
+  get isNewEmailOpen () {
+    return this._isNewEmailOpen;
+  }
+
+  toggleNewEmail() {
+    this._isNewEmailOpen = !this.isNewEmailOpen;
+  }
+
+  handleNewEmail(eventoSubmit: Event) {
+    eventoSubmit.preventDefault();
+
+    this.listaEmails.push({
+      destinatario: this.email.destinatario,
+      assunto: this.email.assunto,
+      conteudo: this.email.conteudo
+    })
+
+    this.email = {
+      destinatario: '',
+      assunto: '',
+      conteudo: ''
+    }
+
+
+  }
+
 }

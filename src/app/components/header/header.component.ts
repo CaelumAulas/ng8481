@@ -4,9 +4,16 @@ import { Component } from '@angular/core';
   selector: 'cmail-header',
   templateUrl: './header.component.html',
   styleUrls: [
-    './header.component.css'
+    './header.component.css',
+    './header-search.css'
   ]
 })
 export class HeaderComponent {
+
+  isMenuOpen = false;
+
+  toggleMenu() {
+   this.isMenuOpen = !this.isMenuOpen;
+  }
 
 }
