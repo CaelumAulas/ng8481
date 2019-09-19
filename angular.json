@@ -5,10 +5,17 @@
   "projects": {
     "ng8481": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "prefix": "cmail",
+          "spec": false,
+          "inlineStyle": true,
+          "export": true
+        }
+      },
       "root": "",
       "sourceRoot": "src",
-      "prefix": "app",
+      "prefix": "cmail",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
