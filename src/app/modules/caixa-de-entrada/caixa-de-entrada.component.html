@@ -12,7 +12,6 @@
           </li>
         </ul>
 
-
         <!-- Floating Multiline Textfield -->
         <button (click)="toggleNewEmail()"
           class="globalFab tooltip btn mdl-button mdl-js-button mdl-button--fab mdl-button--colored" role="tooltip"
@@ -20,8 +19,6 @@
           <span class="material-icons">add</span>
         </button>
 
-        <!-- newEmail--active -->
-        {{formEmail}}
         <form #formEmail="ngForm" (ngSubmit)="handleNewEmail(formEmail)" class="newEmail cmailForm"
           [ngClass]="{'newEmail--active': isNewEmailOpen}">
           <div class="newEmail__card demo-card-wide mdl-card mdl-shadow--2dp">

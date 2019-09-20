@@ -5,9 +5,10 @@ import { LoginComponent } from './app/modules/login/login.component';
 
 
 const rotasApp:Routes = [
-  {path: '', component: CaixaDeEntradaComponent},
   {path: 'cadastro', component: CadastroComponent},
-  {path: 'login', component: LoginComponent}
+  {path: 'login', component: LoginComponent},
+  {path: '', component: CaixaDeEntradaComponent},
+  {path: '**', redirectTo: 'login'}
 ];
 
 export const ModuloRoteamento = RouterModule.forRoot(rotasApp);

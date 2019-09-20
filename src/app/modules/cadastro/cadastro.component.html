@@ -1,1 +1,41 @@
-<p>cadastro works!</p>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+  <cmail-header></cmail-header>
+  <main class="mdl-layout__content">
+    <div class="page-content">
+      <div class="mdl-grid">
+        <form [formGroup]="formCadastro" (ngSubmit)="handleCadastro()">
+          <!-- nome -->
+          <cmail-form-group idCampo="nome" textoDaLabel="Nome" [isInvalid]="false">
+            <input formControlName="nome" required type="text" name="nome" cmailFormField>
+            <span class="mdl-textfield__error">Informar um nome é obrigatório!</span>
+          </cmail-form-group>
+
+          <!-- username -->
+          <cmail-form-group idCampo="username" textoDaLabel="Nome de usuário" [isInvalid]="false">
+            <input formControlName="username" required type="text" name="username" cmailFormField>
+            <span class="mdl-textfield__error">Informar um usuário é obrigatório!</span>
+          </cmail-form-group>
+
+          <!-- senha -->
+          <cmail-form-group idCampo="senha" textoDaLabel="Senha" [isInvalid]="false">
+            <input formControlName="senha" required type="password" name="senha" cmailFormField>
+            <span class="mdl-textfield__error">Informar uma senha é obrigatório!</span>
+          </cmail-form-group>
+
+          <!-- avatar -->
+          <cmail-form-group idCampo="avatar" textoDaLabel="Foto" [isInvalid]="false">
+            <input formControlName="avatar" required type="text" name="avatar" cmailFormField>
+            <span class="mdl-textfield__error">Informar um avatar é obrigatório!</span>
+          </cmail-form-group>
+
+          <div class="mdl-card__actions">
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent">
+              Cadastrar
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </main>
+</div>
