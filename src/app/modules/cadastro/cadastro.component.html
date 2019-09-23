@@ -13,8 +13,7 @@
           <!-- nome -->
           <cmail-form-group idCampo="nome" textoDaLabel="Nome"
               [isInvalid]="nome.invalid && nome.touched">
-            <input formControlName="nome" required type="text" name="nome" cmailFormField>
-
+            <input minlength="2" maxlength="255" formControlName="nome" required type="text" name="nome" cmailFormField>
             <span *ngIf="nome.getError('required')" class="mdl-textfield__error">
               Informar um nome é obrigatório!
             </span>
@@ -32,27 +31,67 @@
           </cmail-form-group>
 
           <!-- username -->
-          <cmail-form-group idCampo="username" textoDaLabel="Nome de usuário" [isInvalid]="false">
-            <input formControlName="username" required type="text" name="username" cmailFormField>
-            <span class="mdl-textfield__error">Informar um usuário é obrigatório!</span>
+          <cmail-form-group idCampo="username" textoDaLabel="Nome de usuário"
+          [isInvalid]="usuario.invalid && usuario.touched">
+            <input  minlength="2" maxlength="255" formControlName="username" required type="text" name="username" cmailFormField>
+            <span *ngIf="usuario.getError('required')" class="mdl-textfield__error">
+              Informar um usuário é obrigatório!
+            </span>
+            <span *ngIf="usuario.getError('minlength')" class="mdl-textfield__error">
+              O usuário deve conter no mínimo
+              {{usuario.getError('minlength').requiredLength}}
+              caracteres
+            </span>
+            <span *ngIf="usuario.getError('maxlength')" class="mdl-textfield__error">
+              O nome deve conter no max {{usuario.getError('maxlength').requiredLength}} caracteres
+            </span>
+            <span *ngIf="usuario.getError('pattern') && !usuario.getError('minlength')" class="mdl-textfield__error">
+              o usuário deve conter apenas letras e numeros!
+            </span>
           </cmail-form-group>
 
           <!-- senha -->
-          <cmail-form-group idCampo="senha" textoDaLabel="Senha" [isInvalid]="false">
-            <input formControlName="senha" required type="password" name="senha" cmailFormField>
-            <span class="mdl-textfield__error">Informar uma senha é obrigatório!</span>
+          <cmail-form-group idCampo="senha" textoDaLabel="Senha"
+            [isInvalid]="senha.invalid && senha.touched">
+            <input  minlength="6" maxlength="255" formControlName="senha" required type="password" name="senha" cmailFormField>
+            <span *ngIf="senha.getError('required')" class="mdl-textfield__error">
+              Informar uma senha é obrigatório!
+            </span>
+            <span *ngIf="senha.getError('minlength')" class="mdl-textfield__error">
+              A senha deve conter no mínimo
+              {{senha.getError('minlength').requiredLength}}
+              caracteres
+            </span>
+            <span *ngIf="senha.getError('maxlength')" class="mdl-textfield__error">
+              O nome deve conter no max {{senha.getError('maxlength').requiredLength}} caracteres
+            </span>
           </cmail-form-group>
 
           <!-- telefone -->
-          <cmail-form-group idCampo="telefone" textoDaLabel="Telefone" [isInvalid]="false">
-            <input formControlName="telefone" required type="text" name="telefone" cmailFormField>
-            <span class="mdl-textfield__error">Informar um telefone é obrigatório!</span>
+          <cmail-form-group idCampo="telefone" textoDaLabel="Telefone"
+            [isInvalid]="telefone.invalid && telefone.touched">
+            <input minlength="8" maxlength="9" formControlName="telefone" required type="text" name="telefone" cmailFormField>
+            <span *ngIf="telefone.getError('required')" class="mdl-textfield__error">
+              Informar um telefone é obrigatório!
+            </span>
+            <span *ngIf="telefone.getError('minlength')" class="mdl-textfield__error">
+              O telefone deve conter no mínimo
+              {{telefone.getError('minlength').requiredLength}}
+              caracteres
+            </span>
+            <span *ngIf="telefone.getError('maxlength')" class="mdl-textfield__error">
+              O nome deve conter no max {{telefone.getError('maxlength').requiredLength}} caracteres
+            </span>
+            <span *ngIf="telefone.getError('pattern') && !telefone.getError('minlength')" class="mdl-textfield__error">
+              o telefone deve conter apenas letras e numeros!
+            </span>
           </cmail-form-group>
 
           <!-- avatar -->
-          <cmail-form-group idCampo="avatar" textoDaLabel="Foto" [isInvalid]="false">
+          <cmail-form-group idCampo="avatar" textoDaLabel="Foto"
+           [isInvalid]="avatar.invalid && avatar.touched">
             <input formControlName="avatar" required type="text" name="avatar" cmailFormField>
-            <span class="mdl-textfield__error">Informar um avatar é obrigatório!</span>
+            <span *ngIf="avatar.getError('required')" class="mdl-textfield__error">Informar um avatar é obrigatório!</span>
           </cmail-form-group>
 
           <div class="mdl-card__actions">

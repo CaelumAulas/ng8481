@@ -28,7 +28,7 @@ export class CadastroComponent implements OnInit {
 
   private validadoresSenha = Validators.compose([
     Validators.required,
-    Validators.minLength(2),
+    Validators.minLength(6),
     Validators.maxLength(255)
   ]);
 
@@ -40,14 +40,14 @@ export class CadastroComponent implements OnInit {
   ]);
 
   public nome = new FormControl('', this.validadoresNome);
-  public username = new FormControl('', this.validadoresUsername);
+  public usuario = new FormControl('', this.validadoresUsername);
   public senha = new FormControl('', this.validadoresSenha);
   public avatar = new FormControl('', Validators.required);
   public telefone = new FormControl('', this.validadoresTelefone);
 
   public formCadastro = new FormGroup({
     nome: this.nome,
-    username: this.username,
+    username: this.usuario,
     senha: this.senha,
     avatar: this.avatar,
     telefone: this.telefone,
