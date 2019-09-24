@@ -4,9 +4,10 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 
 import { CaixaDeEntradaModule } from './modules/caixa-de-entrada/caixa-de-entrada.module';
-import { ModuloRoteamento } from 'src/app.routes';
+
 import { CadastroModule } from './modules/cadastro/cadastro.module';
 import { LoginModule } from './modules/login/login.module';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,7 @@ import { LoginModule } from './modules/login/login.module';
     CaixaDeEntradaModule,
     CadastroModule,
     LoginModule,
-    ModuloRoteamento
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
