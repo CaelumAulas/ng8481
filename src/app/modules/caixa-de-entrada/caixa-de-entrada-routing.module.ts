@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from '../login/login.component';
+import { CaixaDeEntradaComponent } from './caixa-de-entrada.component';
 
 
 const routes: Routes = [{
-  pathMatch: '', component: LoginComponent
+  path: '',
+  component: CaixaDeEntradaComponent
 }];
 
 @NgModule({

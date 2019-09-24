@@ -6,7 +6,8 @@ import { CadastroComponent } from './cadastro.component';
 const routes: Routes = [
   {
     path: '',
-    component: CadastroComponent
+    component: CadastroComponent,
+    pathMatch: 'full'
   }
 ];
 

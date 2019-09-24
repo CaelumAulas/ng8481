@@ -12,8 +12,12 @@ const appRoutes: Routes = [
     loadChildren: () => import('./modules/login/login.module').then( m => m.LoginModule)
   }
   ,{
-    path: '',
+    path: 'inbox',
     loadChildren: () => import('./modules/caixa-de-entrada/caixa-de-entrada.module').then( m => m.CaixaDeEntradaModule)
+  }
+  ,{
+    path: ''
+    ,redirectTo: 'inbox'
     ,pathMatch: 'full'
   }
   ,{
