@@ -92,6 +92,18 @@
            [isInvalid]="avatar.invalid && avatar.touched">
             <input formControlName="avatar" required type="text" name="avatar" cmailFormField>
             <span *ngIf="avatar.getError('required')" class="mdl-textfield__error">Informar um avatar é obrigatório!</span>
+            <span *ngIf="avatar.getError('urlInvalida')" class="mdl-textfield__error">
+              Esta URL não está disponível
+            </span>
+
+            <span *ngIf="avatar.status == 'PENDING' " class="mdl-textfield__error mdl-textfield__checking">
+              Verificando...
+            </span>
+
+            <span *ngIf="avatar.status == 'VALID' " class="mdl-textfield__error mdl-textfield__valid">
+              Imagem válida
+            </span>
+
           </cmail-form-group>
 
           <div class="mdl-card__actions">

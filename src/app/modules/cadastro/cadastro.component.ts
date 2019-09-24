@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpResponseBase } from '@angular/common/http';
 import { UserInputDTO } from 'src/app/models/dto/user-input';
 import { Router } from '@angular/router';
+import { map, catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'cmail-cadastro',
@@ -10,7 +11,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./cadastro.component.css']
 })
 export class CadastroComponent implements OnInit {
-
 
   private validadoresNome = Validators.compose([
     Validators.required,
@@ -42,8 +42,8 @@ export class CadastroComponent implements OnInit {
   public nome = new FormControl('', this.validadoresNome);
   public usuario = new FormControl('', this.validadoresUsername);
   public senha = new FormControl('', this.validadoresSenha);
-  public avatar = new FormControl('', Validators.required);
   public telefone = new FormControl('', this.validadoresTelefone);
+  public avatar = new FormControl('', Validators.required, this.validaImagem.bind(this));
 
   public formCadastro = new FormGroup({
     nome: this.nome,
@@ -55,7 +55,7 @@ export class CadastroComponent implements OnInit {
 
   public mensagem = '';
 
-  constructor(private conexaoApi: HttpClient
+  constructor(private httpRequest: HttpClient
               ,private roteador: Router) { }
 
   ngOnInit() {
@@ -63,18 +63,43 @@ export class CadastroComponent implements OnInit {
     //this.formCadastro.get('nome').getError('minlength')
   }
 
+  validaImagem(campo: FormControl) {
+
+    const erroValidacao = {
+      urlInvalida: true
+    }
+
+    return this.httpRequest
+              .head(
+                campo.value,
+                {observe: 'response'}
+              )
+              .pipe(
+                map((resposta: HttpResponseBase) => {
+                  const contentType = resposta.headers.get('Content-Type');
+
+                  if(resposta.ok && contentType.includes('image')) {
+                    //null quer dizer que nao tem erros de validacao
+                    return null
+                  } else {
+                    return erroValidacao
+                  }
+                })
+                ,catchError(() => [erroValidacao])
+              )
+  }
+
   handleCadastro() {
 
     if(this.formCadastro.invalid) {
-      console.log('INVALIDOOO');
-
+      this.formCadastro.markAllAsTouched();
       return;
     }
 
     //data transfer object -DTO
     const userDTO = new UserInputDTO(this.formCadastro.value);
 
-    this.conexaoApi
+    this.httpRequest
         .post('http://localhost:3200/users', userDTO)
         .subscribe(
           resposta => {
