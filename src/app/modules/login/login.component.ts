@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { LoginOutput } from 'src/app/models/login-output';
+import { LoginService } from 'src/app/services/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'cmail-login',
@@ -10,36 +10,33 @@ import { LoginOutput } from 'src/app/models/login-output';
 })
 export class LoginComponent implements OnInit {
 
-  public email = new FormControl('', Validators.required);
-  public senha = new FormControl('', Validators.required);
+  public email = new FormControl('vanessa@cmail.com.br', Validators.required);
+  public senha = new FormControl('123', Validators.required);
 
   public formLogin = new FormGroup({
     email: this.email,
     senha: this.senha
   })
 
-  constructor(private http: HttpClient) { }
+  public mensagem = '';
+
+  constructor(private loginService: LoginService
+              ,private roteador: Router) { }
 
   ngOnInit() {}
 
   handleLogin(){
 
-    const loginDto = {
-      email: this.email.value,
-      password: this.senha.value
+    if(this.formLogin.invalid) {
+      this.formLogin.markAllAsTouched()
+      return;
     }
-    console.log(this.formLogin.value);
 
-    this.http
-        .post('http://localhost:3200/login', loginDto)
+    this.loginService
+        .autenticar(this.formLogin.value)
         .subscribe(
-          (resposta: LoginOutput) => {
-            console.log('deu certo');
-            localStorage.setItem('cmail-token', resposta.token)
-          }
-          , (erro) => {
-            console.log('deu ruim');
-          }
+          () => this.roteador.navigate(['inbox'])
+          ,(erro) => this.mensagem = erro.error.message
         )
 
   }

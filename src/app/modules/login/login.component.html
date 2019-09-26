@@ -9,16 +9,20 @@
 
       <form (ngSubmit)="handleLogin()" [formGroup]="formLogin" autocomplete="off" class="mdl-card__supporting-text">
 
-        <!-- aqui os campos do formulário -->
-        <cmail-form-group textoDaLabel="Email" id="email" [isInvalid]="false">
+        <p *ngIf="mensagem">
+            {{mensagem}}
+        </p>
+
+        <cmail-form-group textoDaLabel="Email" id="email"
+        [isInvalid]="email.invalid && email.touched">
           <input email formControlName="email" type="email" required name="email" cmailFormField>
           <span class="mdl-textfield__error">
             Email é obrigatório
           </span>
         </cmail-form-group>
 
-
-        <cmail-form-group textoDaLabel="Senha" id="senha" [isInvalid]="false">
+        <cmail-form-group textoDaLabel="Senha" id="senha"
+        [isInvalid]="senha.invalid && senha.touched">
           <input formControlName="senha" type="password" required name="senha" cmailFormField>
           <span class="mdl-textfield__error">
             Senha é obrigatório
