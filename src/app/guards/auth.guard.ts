@@ -9,11 +9,9 @@ export class AuthGuard implements CanActivate {
   canActivate() {
 
     if (localStorage.getItem('cmail-token')) {
-      console.log('tem token');
       return true
     }
     else {
-      console.log('n tem token');
       this.roteador.navigate(['login'])
     }
 
